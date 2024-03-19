@@ -1,0 +1,214 @@
+#####################################################################
+##              _ ____                     __ _                    ##
+##             (_)___ \                   / _(_)                   ##
+##              _  __) |   ___ ___  _ __ | |_ _  __ _              ##
+##             | ||__ <   / __/ _ \| '_ \|  _| |/ _` |             ##
+##             | |___) | | (_| (_) | | | | | | | (_| |             ##
+##             |_|____/   \___\___/|_| |_|_| |_|\__, |             ##
+##                                               __/ |             ##
+##                                              |___/              ##
+#####################################################################
+
+#####################################################################
+#   Settings
+#####################################################################
+set $mod Mod4
+font pango:CodeNewRoman Nerd Mono 8 
+
+#####################################################################
+#   Setup
+#####################################################################
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# clipboard
+exec --no-startup-id xfce4-clipman -h
+
+# network manager
+exec --no-startup-id nm-applet
+
+# bluetooth manager
+# exec blueberry-tray
+
+# zoom out a bit
+exec xrandr --output LVDS-1 --scale 1.25x1.25
+
+#####################################################################
+#   Shortcuts
+#####################################################################
+
+# terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# browser
+bindsym $mod+i exec firefox
+
+# file browser
+bindsym $mod+e exec thunar /mnt/722C71162C70D697/Users/humungus/Downloads/
+
+# dmenu (program launcher)
+bindsym $mod+x exec dmenu_run
+
+# screenshooter
+bindsym Insert exec xfce4-screenshooter -r
+
+# i3 config
+bindsym $mod+Shift+Escape exec xed .config/i3/config
+
+# i3status config
+bindsym mod1+Shift+Escape exec xed .config/i3status/config
+
+# obsidian
+bindsym $mod+o exec /usr/local/bin/obsidian.sh
+
+#####################################################################
+#   Laptop Functions
+#####################################################################
+# shutdown
+bindsym $mod+Shift+e exec shutdown now
+
+# logout
+bindsym $mod+l exec i3-msg exit
+
+# volume controls
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# brightness controls
+set $brightness  ~/.config/i3/brightness_script.sh
+bindsym XF86MonBrightnessUp exec $brightness 1
+bindsym XF86MonBrightnessDown exec $brightness 0
+
+#####################################################################
+#   i3 Functions
+#####################################################################
+# restart i3
+bindsym $mod+Shift+r restart
+
+# kill focused window
+bindsym $mod+q kill
+
+# fullscreen
+bindsym $mod+f fullscreen toggle
+
+# split horizontal
+bindsym $mod+h split h
+
+# split vertical
+bindsym $mod+v split v
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus uflatpak install flathub md.obsidian.Obsidianp
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+mod1+Right move right
+
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # escape resize mode
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+#####################################################################
+#   Workspaces
+#####################################################################
+# workspaces
+set $ws1 "1"
+set $ws1_cmd ""
+set $ws1_name ""
+
+set $ws2 "2"
+set $ws2_cmd ""
+set $ws2_name ""
+
+set $ws3 "3"
+set $ws3_cmd ""
+set $ws3_name ""
+
+set $ws4 "4"
+set $ws4_cmd ""
+set $ws4_name ""
+
+set $ws5 "5"
+set $ws5_cmd ""
+set $ws5_name ""
+
+set $ws6 "6"
+set $ws6_cmd ""
+set $ws6_name ""
+
+set $ws7 "7"
+set $ws7_cmd ""
+set $ws7_name ""
+
+set $ws8 "8"
+set $ws8_cmd ""
+set $ws8_name ""
+
+set $ws9 "9"
+set $ws9_cmd ""
+set $ws9_name ""
+
+set $ws0 "0"
+set $ws0_cmd ""
+set $ws0_name ""
+
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1; exec i3-msg '[class=$ws1_name workspace= $ws1] focus' || $ws1_cmd
+bindsym $mod+2 workspace number $ws2; exec i3-msg '[class=$ws2_name workspace= $ws2] focus' || $ws2_cmd
+bindsym $mod+3 workspace number $ws3; exec i3-msg '[class=$ws3_name workspace= $ws3] focus' || $ws3_cmd
+bindsym $mod+4 workspace number $ws4; exec i3-msg '[class=$ws4_name workspace= $ws4] focus' || $ws4_cmd
+bindsym $mod+5 workspace number $ws5; exec i3-msg '[class=$ws5_name workspace= $ws5] focus' || $ws5_cmd
+bindsym $mod+6 workspace number $ws6; exec i3-msg '[class=$ws6_name workspace= $ws6] focus' || $ws6_cmd
+bindsym $mod+7 workspace number $ws7; exec i3-msg '[class=$ws7_name workspace= $ws7] focus' || $ws7_cmd
+bindsym $mod+8 workspace number $ws8; exec i3-msg '[class=$ws8_name workspace= $ws8] focus' || $ws8_cmd
+bindsym $mod+9 workspace number $ws9; exec i3-msg '[class=$ws9_name workspace= $ws9] focus' || $ws9_cmd
+bindsym $mod+0 workspace number $ws0; exec i3-msg '[class=$ws0_name workspace= $ws0] focus' || $ws0_cmd
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+#####################################################################
+#   i3 Appearance
+#####################################################################
+# class                 border  backgr. text    indicator child_border
+client.focused          #888888 #000000 #ffffff #000000   #888888
+client.focused_inactive #000000 #000000 #ffffff #000000   #000000
+client.unfocused        #000000 #000000 #888888 #000000   #000000
+client.urgent           #ff0000 #ff0000 #ffffff #ff0000   #ff0000
+client.placeholder      #000000 #000000 #ffffff #000000   #ff0000
+
+client.background       #000000
+
+#####################################################################
+#   i3status Bar
+#####################################################################
+bar {
+        position top
+        status_command i3status
+}
